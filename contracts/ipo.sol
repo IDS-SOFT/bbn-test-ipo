@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/access/Ownable.sol";
+pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract IPOContract is Ownable {
+contract IPOContract {
     string public companyName;
     uint256 public totalShares;
     uint256 public sharePrice;
@@ -15,7 +13,7 @@ contract IPOContract is Ownable {
 
     event SharesPurchased(address indexed buyer, uint256 sharesPurchased);
     event SharesRefunded(address indexed buyer, uint256 sharesRefunded);
-    event CheckBalance(string text, uint amount);
+    event CheckBalance(uint amount);
 
     constructor(
         string memory _companyName,
@@ -53,11 +51,8 @@ contract IPOContract is Ownable {
     }
     
     function getBalance(address user_account) external returns (uint){
-    
-       string memory data = "User Balance is : ";
        uint user_bal = user_account.balance;
-       emit CheckBalance(data, user_bal );
+       emit CheckBalance(user_bal);
        return (user_bal);
-
     }
 }
